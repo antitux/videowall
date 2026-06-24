@@ -1,0 +1,305 @@
+/*
+* Copyright (C) 2026 Antitux Networks LLC <me@antitux.dev>
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU Affero General Public License as published
+* by the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU Affero General Public License for more details.
+*
+* You should have received a copy of the GNU Affero General Public License
+* along with this program.  If not, see <https://gnu.org>.
+*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #0e0e10;
+  color: #efeff1;
+  overflow: hidden;
+}
+
+/* Modal Styles */
+.modal {
+  display: flex;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color: #18181b;
+  padding: 40px;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.modal-content h2 {
+  margin-bottom: 10px;
+  color: #9147ff;
+}
+
+.modal-content p {
+  margin-bottom: 20px;
+  color: #adadb8;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #efeff1;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  background-color: #0e0e10;
+  border: 1px solid #464649;
+  border-radius: 4px;
+  color: #efeff1;
+  font-size: 14px;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #9147ff;
+}
+
+button[type="submit"], .config-btn {
+  background-color: #9147ff;
+  color: #efeff1;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  width: 100%;
+  transition: background-color 0.2s;
+}
+
+button[type="submit"]:hover {
+  background-color: #7c3aed;
+}
+
+.help-text {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #464649;
+  font-size: 14px;
+}
+
+.help-text ul {
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+.help-text li {
+  margin-bottom: 8px;
+}
+
+.help-text a {
+  color: #9147ff;
+  text-decoration: none;
+}
+
+.help-text a:hover {
+  text-decoration: underline;
+}
+
+/* Header Styles */
+.header {
+  background-color: #18181b;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #26262c;
+}
+
+/* Mouse detection overlay */
+.header-trigger {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  z-index: 999;
+  pointer-events: none;
+}
+
+.header-trigger.active {
+  pointer-events: all;
+}
+
+.header.hidden {
+  display: none;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.status {
+  font-size: 12px;
+  color: #adadb8;
+}
+
+.status.checking {
+  color: #9147ff;
+}
+
+.config-btn {
+  width: auto;
+  padding: 8px 12px;
+  font-size: 14px;
+  background-color: #464649;
+  margin-left: 10px;
+}
+
+.config-btn:hover {
+  background-color: #53535f;
+}
+
+.spinner {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border: 2px solid #9147ff;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 6px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Streams Container */
+.streams-container {
+  display: grid;
+  height: calc(100vh - 51px);
+  gap: 0;
+  background-color: #0e0e10;
+  padding: 0;
+  justify-items: stretch;
+  align-items: stretch;
+}
+
+.streams-container.fullscreen {
+  height: 100vh;
+}
+
+.stream {
+  position: relative;
+  background-color: #18181b;
+  overflow: hidden;
+}
+
+.stream iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.stream-label {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* No Streams View */
+#no-streams {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 51px);
+  background-color: #18181b;
+}
+
+#no-streams.fullscreen {
+  height: 100vh;
+}
+
+.no-streams-content {
+  text-align: center;
+  max-width: 500px;
+  padding: 40px;
+}
+
+.icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+}
+
+.no-streams-status {
+  font-size: 24px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.message {
+  font-size: 16px;
+  color: #adadb8;
+  margin-bottom: 30px;
+}
+
+.countdown {
+  font-size: 14px;
+  color: #9147ff;
+  background-color: #26262c;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.privacy-notice {
+  background-color: #1f1f23;
+  border-left: 3px solid #00c74d;
+  padding: 12px 15px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #464649;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #efeff1;
+  line-height: 1.5;
+}
+
+.privacy-notice strong {
+  color: #00c74d;
+  display: block;
+  margin-bottom: 5px;
+}

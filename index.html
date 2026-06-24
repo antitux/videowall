@@ -1,0 +1,115 @@
+<!--
+Copyright (C) 2026 Antitux Networks LLC <me@antitux.dev>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published
+by the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://gnu.org>.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TTV VideoWall</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Configuration Modal -->
+    <div id="config-modal" class="modal">
+        <div class="modal-content">
+            <h2>TTV VideoWall Configuration</h2>
+            <p>Enter your Twitch API credentials to get started.</p>
+
+            <form id="config-form">
+                <div class="form-group">
+                    <label for="client-id">Client ID:</label>
+                    <input type="text" id="client-id" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="access-token">Access Token:</label>
+                    <input type="password" id="access-token" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="user-id">User ID:</label>
+                    <input type="text" id="user-id" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="parent-domain">Parent Domain:</label>
+                    <input type="text" id="parent-domain" 
+                           placeholder="e.g., localhost or yourdomain.com" required>
+                </div>
+
+                <button type="submit">Save & Start</button>
+            </form>
+
+            <div class="help-text">
+                <p><strong>Need credentials?</strong></p>
+                <ul>
+                    <li>Get Client ID & Token: 
+                        <a href="https://twitchtokengenerator.com/" target="_blank">
+                            Twitch Token Generator
+                        </a>
+                    </li>
+                    <li>Get User ID: 
+                        <a href="https://www.streamweasels.com/tools/convert-twitch-username-to-user-id/" 
+                           target="_blank">
+                            Twitch ID Lookup
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="privacy-notice">
+                <strong>🔒 Privacy Notice:</strong> All credentials are stored locally in your browser only. 
+                No data is sent to any external servers. Your API keys and tokens remain completely private.
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="app" style="display: none;">
+        <div class="header" id="header">
+            <div class="title" id="title">
+                TTV VideoWall: Loading...
+            </div>
+            <div class="status" id="status">
+                Next check in <span id="timer">60</span>s
+            </div>
+            <button class="config-btn" id="reconfig-btn">⚙️</button>
+        </div>
+        
+        <div class="streams-container" id="streams-container">
+            <!-- Streams will be inserted here -->
+        </div>
+        
+        <!-- No Streams View -->
+        <div id="no-streams" style="display: none;">
+            <div class="no-streams-content">
+                <div class="icon">📺</div>
+                <div class="no-streams-status">No Streams Live</div>
+                <div class="message">
+                    None of your followed channels are currently streaming.
+                </div>
+                <div class="countdown">
+                    <span class="spinner"></span>
+                    Checking for live streams... <span id="no-streams-timer">60</span>s
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

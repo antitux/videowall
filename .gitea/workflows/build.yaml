@@ -1,0 +1,48 @@
+# Copyright (C) 2026 Antitux Networks LLC <me@antitux.dev>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <https://gnu.org>.
+
+name: build
+
+on:
+  schedule:
+  - cron: '0 15 * * *'
+  workflow_dispatch:
+  push:
+
+jobs:
+  build-docker:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 1
+    - name: Get SHA
+      run: |
+        echo ${{ env.GITHUB_SHA }}
+    - name: Login to Docker Repo
+      uses: docker/login-action@v3
+      with:
+        registry: ${{ vars.DOCKER_REGISTRY }}
+        username: ${{ vars.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_KEY }}
+    - name: Build and Push
+      uses: docker/build-push-action@v6
+      with:
+        push: true
+        no-cache: true
+        tags: |
+          ${{ vars.DOCKER_REGISTRY }}/${{ vars.PROJECT_NAME }}:${{ env.GITHUB_SHA }}
+          ${{ vars.DOCKER_REGISTRY }}/${{ vars.PROJECT_NAME }}:latest

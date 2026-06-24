@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Exec=firefox -P default-release --marionette --kiosk 'https://vw.antx.gg/'
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=Firefox
+Name=Firefox
+Comment[en_US]=
+Comment=
