@@ -45,7 +45,7 @@ A Simple web app that displays all your followed Twitch streams in a dynamic gri
 
 ### Option 1: Use the website (The easy way!)
 
-1. **In a FireFox-Based Browser:** https://vw.antx.dev
+1. **In a FireFox-Based Browser:** https://vw.antx.gg
 
 **<span style="color:red;"><u>BIG RED NOTE: No data input into the app is passed to the server. I do not receive your api keys. I can also not guarantee that the server will always be up.</u></span>**
 
@@ -106,7 +106,6 @@ videowall/
 ├── docker-compose-example.yaml     # Docker Compose configuration (example prod)
 ├── index.html                      # main index file
 ├── styles.css                      # CSS Style Files
-
 └── scripts/                        # Helper scripts for running Firefox on Ubuntu Desktop in kiosk mode.
 │ └── README.md                     # Helper Scripts README.md
 │ └── firefox_desktop_restart.sh    # Restarts Firefox remotely
