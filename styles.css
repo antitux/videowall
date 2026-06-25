@@ -352,6 +352,16 @@ button[type="submit"]:hover {
   margin-top: 10px;
 }
 
+.browser-warning-content a {
+  color: #fff;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.browser-warning-content a:hover {
+  color: #ffdddd;
+}
+
 .browser-warning-content button:hover {
   background-color: #f0f0f0;
 }

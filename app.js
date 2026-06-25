@@ -33,32 +33,44 @@ class TTVVideoWall {
   }
 
   detectBrowser() {
-  const userAgent = navigator.userAgent.toLowerCase();
-  const isChrome = userAgent.includes('chrome') && !userAgent.includes('edg');
-  const isEdge = userAgent.includes('edg');
-  const isChromium = userAgent.includes('chromium');
-  const isOBS = userAgent.includes('obs');
-  
-  if ((isChrome || isEdge || isChromium || isOBS)) {
-    this.showBrowserWarning();
+    const userAgent = navigator.userAgent.toLowerCase();
+    const isChrome = userAgent.includes('chrome') && !userAgent.includes('edg');
+    const isEdge = userAgent.includes('edg');
+    const isChromium = userAgent.includes('chromium');
+    const isOBS = userAgent.includes('obs');
+    
+    // Show warning for all Chrome-based browsers including OBS
+    if (isChrome || isEdge || isChromium || isOBS) {
+      // Delay showing warning until after app loads
+      setTimeout(() => {
+        this.showBrowserWarning();
+      }, 100);
+    }
   }
-}
-
-showBrowserWarning() {
-  const backdrop = document.createElement('div');
-  warning.className = 'browser-warning-backdrop';
-  warning.innerHTML = `
-  <div class="browser-warning">
-    <div class="browser-warning-content">
-      <strong>⚠️ Browser Compatibility Warning ⚠️</strong>
-      <p>This application WILL not function properly in Chrome-based browsers due to autoplay restrictions and CORS policies.</p>
-      <p>Use <a href="https://getfirefox.com">Firefox</a> or <a href="https://zen-browser.app/">Zen Browser</a> and save yourself the pain.</p>
-      <button onclick="this.parentElement.parentElement.remove()">Dismiss</button>
-    </div>
-  </div>
-  `;
-  document.body.appendChild(backdrop);
-}
+  
+  showBrowserWarning() {
+    const backdrop = document.createElement('div');
+    backdrop.className = 'browser-warning-backdrop';
+    backdrop.innerHTML = `
+      <div class="browser-warning">
+        <div class="browser-warning-content">
+          <strong>⚠️ Browser Compatibility Warning ⚠️</strong>
+          <p>This application WILL not function properly in Chrome-based browsers due to autoplay restrictions and CORS policies.</p>
+          <p>Use <a href="https://getfirefox.com" target="_blank">Firefox</a> or <a href="https://zen-browser.app/" target="_blank">Zen Browser</a> and save yourself the pain.</p>
+          <button class="dismiss-warning">Dismiss</button>
+        </div>
+      </div>
+    `;
+    
+    // Allow dismissing by clicking backdrop or button
+    backdrop.onclick = (e) => {
+      if (e.target === backdrop || e.target.classList.contains('dismiss-warning')) {
+        backdrop.remove();
+      }
+    };
+      
+    document.body.appendChild(backdrop);
+  }
 
   getUrlParam(param) {
     const urlParams = new URLSearchParams(window.location.search);
