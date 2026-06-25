@@ -46,7 +46,7 @@ class TTVVideoWall {
 
 showBrowserWarning() {
   const warning = document.createElement('div');
-  warning.className = 'browser-warning';
+  warning.className = 'browser-warning-backdrop';
   warning.innerHTML = `
     <div class="browser-warning-content">
       <strong>⚠️ Browser Compatibility Warning ⚠️</strong>
@@ -55,7 +55,7 @@ showBrowserWarning() {
       <button onclick="this.parentElement.parentElement.remove()">Dismiss</button>
     </div>
   `;
-  document.body.appendChild(warning);
+  document.body.appendChild(backdrop);
 }
 
   getUrlParam(param) {
