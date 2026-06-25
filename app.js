@@ -45,7 +45,7 @@ class TTVVideoWall {
 }
 
 showBrowserWarning() {
-  const warning = document.createElement('div');
+  const backdrop = document.createElement('div');
   warning.className = 'browser-warning-backdrop';
   warning.innerHTML = `
   <div class="browser-warning">
