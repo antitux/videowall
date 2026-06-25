@@ -48,12 +48,14 @@ showBrowserWarning() {
   const warning = document.createElement('div');
   warning.className = 'browser-warning-backdrop';
   warning.innerHTML = `
+  <div class="browser-warning">
     <div class="browser-warning-content">
       <strong>⚠️ Browser Compatibility Warning ⚠️</strong>
       <p>This application WILL not function properly in Chrome-based browsers due to autoplay restrictions and CORS policies.</p>
       <p>Use <a href="https://getfirefox.com">Firefox</a> or <a href="https://zen-browser.app/">Zen Browser</a> and save yourself the pain.</p>
       <button onclick="this.parentElement.parentElement.remove()">Dismiss</button>
     </div>
+  </div>
   `;
   document.body.appendChild(backdrop);
 }
