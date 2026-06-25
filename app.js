@@ -55,7 +55,7 @@ class TTVVideoWall {
       <div class="browser-warning">
         <div class="browser-warning-content">
           <strong>⚠️ Browser Compatibility Warning ⚠️</strong>
-          <p>This application WILL NOT, UNDER ANY CIRCUMSTANCES WHATSEOVER, function properly in Chrome-based browsers due to autoplay restrictions and CORS policies. I am a good enough frontend developer to create weird javascript hacks to try and make it work. If you are, please <a href="https://github.com/antitux/videowall/pulls" target="_blank">open a PR</a> and fix it. I'm a backend guy. I make server go BRRRRRR...</p>
+          <p>This application WILL NOT, UNDER ANY CIRCUMSTANCES WHATSEOVER, function properly in Chrome-based browsers due to autoplay restrictions and CORS policies. I am not a good enough frontend developer to create weird javascript hacks to try and make it work. If you are, please <a href="https://github.com/antitux/videowall/pulls" target="_blank">open a PR</a> and fix it. I'm a backend guy. I make server go BRRRRRR...</p>
           <p>Use <a href="https://getfirefox.com" target="_blank">Firefox</a> or <a href="https://zen-browser.app/" target="_blank">Zen Browser</a> and save yourself the pain.</p>
           <button class="dismiss-warning">Dismiss</button>
         </div>
