@@ -38,7 +38,7 @@ class TTVVideoWall {
     const isEdge = userAgent.includes('edg');
     const isChromium = userAgent.includes('chromium');
     const isOBS = userAgent.includes('obs');
-    
+
     // Show warning for all Chrome-based browsers including OBS
     if (isChrome || isEdge || isChromium || isOBS) {
       // Delay showing warning until after app loads
@@ -47,7 +47,7 @@ class TTVVideoWall {
       }, 100);
     }
   }
-  
+
   showBrowserWarning() {
     const backdrop = document.createElement('div');
     backdrop.className = 'browser-warning-backdrop';
@@ -55,20 +55,20 @@ class TTVVideoWall {
       <div class="browser-warning">
         <div class="browser-warning-content">
           <strong>⚠️ Browser Compatibility Warning ⚠️</strong>
-          <p>This application WILL not function properly in Chrome-based browsers due to autoplay restrictions and CORS policies.</p>
+          <p>This application WILL NOT, UNDER ANY CIRCUMSTANCES WHATSEOVER, function properly in Chrome-based browsers due to autoplay restrictions and CORS policies. I am a good enough frontend developer to create weird javascript hacks to try and make it work. If you are, please <a href="https://github.com/antitux/videowall/pulls" target="_blank">open a PR</a> and fix it. I'm a backend guy. I make server go BRRRRRR...</p>
           <p>Use <a href="https://getfirefox.com" target="_blank">Firefox</a> or <a href="https://zen-browser.app/" target="_blank">Zen Browser</a> and save yourself the pain.</p>
           <button class="dismiss-warning">Dismiss</button>
         </div>
       </div>
     `;
-    
+
     // Allow dismissing by clicking backdrop or button
     backdrop.onclick = (e) => {
       if (e.target === backdrop || e.target.classList.contains('dismiss-warning')) {
         backdrop.remove();
       }
     };
-      
+
     document.body.appendChild(backdrop);
   }
 
