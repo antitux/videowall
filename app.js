@@ -32,6 +32,32 @@ class TTVVideoWall {
     this.init();
   }
 
+  detectBrowser() {
+  const userAgent = navigator.userAgent.toLowerCase();
+  const isChrome = userAgent.includes('chrome') && !userAgent.includes('edg');
+  const isEdge = userAgent.includes('edg');
+  const isChromium = userAgent.includes('chromium');
+  const isOBS = userAgent.includes('obs');
+  
+  if ((isChrome || isEdge || isChromium || isOBS)) {
+    this.showBrowserWarning();
+  }
+}
+
+showBrowserWarning() {
+  const warning = document.createElement('div');
+  warning.className = 'browser-warning';
+  warning.innerHTML = `
+    <div class="browser-warning-content">
+      <strong>⚠️ Browser Compatibility Warning ⚠️</strong>
+      <p>This application WILL not function properly in Chrome-based browsers due to autoplay restrictions and CORS policies.</p>
+      <p>Use <a href="https://getfirefox.com">Firefox</a> or <a href="https://zen-browser.app/">Zen Browser</a> and save yourself the pain.</p>
+      <button onclick="this.parentElement.parentElement.remove()">Dismiss</button>
+    </div>
+  `;
+  document.body.appendChild(warning);
+}
+
   getUrlParam(param) {
     const urlParams = new URLSearchParams(window.location.search);
     const value = urlParams.get(param);
@@ -49,6 +75,9 @@ class TTVVideoWall {
     const modal = document.getElementById('config-modal');
     modal.style.display = 'none';
     
+    // Check Browser Compatibility
+    this.detectBrowser();
+
     // Check for URL parameters first
     const urlConfig = this.getConfigFromUrl();
     
