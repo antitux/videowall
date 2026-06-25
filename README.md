@@ -1,4 +1,4 @@
-# Twitch Stream Tracker
+# TTV VideoWall
 
 A Simple web app that displays all your followed Twitch streams in a dynamic grid layout. The app automatically checks for stream status changes and refreshes when streamers go live or offline. Use Firefox! This does not work with Chrome!!!
 
