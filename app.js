@@ -408,9 +408,9 @@ hideConfigModal() {
       if (usernames.length > 6) {
         quality = 'auto';
       } else if (usernames.length > 12) {
-        quality = 'auto';
+        quality = '480p';
       } else {
-        quality = 'auto';
+        quality = '360p';
       }
 
       container.innerHTML = '';
