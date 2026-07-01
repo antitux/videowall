@@ -161,10 +161,7 @@ firefox --kiosk --new-window http://localhost:5000/?hide_header=true
 ```
 
 ### Streams not loading
-
-- Verify your `PARENT DOMAIN` matches the domain you're accessing the app from
 - If you're running locally, and the url is `http://localhost:{port}/`, then your Parent Domain is Localhost
-- For production, use your actual domain (e.g., `example.com`)
 
 ### Auto-refresh not working
 
