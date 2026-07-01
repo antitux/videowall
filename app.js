@@ -375,6 +375,9 @@ hideConfigModal() {
       // Build parent parameter - use current hostname as primary
       const currentHost = window.location.hostname;
       const configuredParent = this.config.parentDomain;
+
+
+
       const isValidParentHost = (host) =>
         typeof host === 'string' &&
         /^[a-zA-Z0-9.-]+$/.test(host) &&
@@ -401,6 +404,15 @@ hideConfigModal() {
         .map((p) => `parent=${encodeURIComponent(p)}`)
         .join('&');
 
+      let quality;
+      if (usernames.length > 6) {
+        quality = 'auto';
+      } else if (usernames.length > 12) {
+        quality = '480p';
+      } else {
+        quality = '360p';
+      }
+
       container.innerHTML = '';
       usernames.forEach(username => {
         const streamDiv = document.createElement('div');
@@ -413,7 +425,7 @@ hideConfigModal() {
         const iframe = document.createElement('iframe');
         iframe.setAttribute(
           'src',
-          `https://player.twitch.tv/?channel=${encodeURIComponent(username)}&${parentParams}&autoplay=true&muted=true&quality=480p`
+          `https://player.twitch.tv/?channel=${encodeURIComponent(username)}&${parentParams}&autoplay=true&muted=true&quality=${quality}`
         );
         iframe.setAttribute('allowfullscreen', '');
         iframe.setAttribute('allow', 'autoplay; fullscreen');
