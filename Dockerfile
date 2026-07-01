@@ -16,11 +16,6 @@
 FROM nginx:alpine
 ARG BUILD_ENV=production
 COPY index.html styles.css app.js /usr/share/nginx/html/
-FROM nginx:alpine
-ARG BUILD_ENV=production
-
-COPY index.html styles.css app.js /usr/share/nginx/html/
-
 RUN if [ "$BUILD_ENV" = "local" ]; then \
         mkdir -p /etc/nginx/ssl; \
         apk add --no-cache openssl; \
@@ -30,8 +25,6 @@ RUN if [ "$BUILD_ENV" = "local" ]; then \
             -out /etc/nginx/ssl/selfsigned.crt \
             -subj "/C=US/ST=State/L=City/O=Org/OU=Dev/CN=localhost"; \
     fi
-
 COPY nginx/nginx-${BUILD_ENV}.conf /etc/nginx/conf.d/default.conf
-
 EXPOSE 80 443
 CMD ["nginx", "-g", "daemon off;"]
