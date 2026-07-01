@@ -17,8 +17,13 @@ version: '3.8'
 
 services:
   videowall:
-    build: .
+    build:
+      context: .
+      args:
+        BUILD_ENV: local
+    pull_policy: always
     container_name: videowall
     restart: unless-stopped
     ports:
-      - "8080:80"
+      - "80:80"
+      - "443:443"
