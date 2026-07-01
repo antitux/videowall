@@ -171,11 +171,13 @@ class TTVVideoWall {
   }
 
   handleConfigSubmit() {
+    const parentDomainInput = document.getElementById('parent-domain').value.trim();
+
     const config = {
       clientId: document.getElementById('client-id').value.trim(),
       accessToken: document.getElementById('access-token').value.trim(),
       userId: document.getElementById('user-id').value.trim(),
-      parentDomain: document.getElementById('parent-domain').value.trim()
+      parentDomain: parentDomainInput || window.location.hostname
     };
 
     this.saveConfig(config);
@@ -184,29 +186,34 @@ class TTVVideoWall {
     this.startTracking();
   }
 
-showConfigModal() {
-  const modal = document.getElementById('config-modal');
-  modal.style.display = 'flex';
-  
-  if (this.config) {
-    document.getElementById('client-id').value = this.config.clientId;
-    document.getElementById('access-token').value = this.config.accessToken;
-    document.getElementById('user-id').value = this.config.userId;
-    document.getElementById('parent-domain').value = 
-      this.config.parentDomain;
+  showConfigModal() {
+    const modal = document.getElementById('config-modal');
+    modal.style.display = 'flex';
     
-    // Allow closing by clicking outside if config exists
-    modal.onclick = (e) => {
-      if (e.target === modal) {
-        this.hideConfigModal();
-        modal.onclick = null; // Remove the handler
-      }
-    };
-  } else {
-    // Don't allow closing if no config exists
-    modal.onclick = null;
+    // Show detected domain
+    const detectedDomain = document.getElementById('detected-domain');
+    if (detectedDomain) {
+      detectedDomain.textContent = window.location.hostname || 'localhost';
+    }
+    
+    if (this.config) {
+      document.getElementById('client-id').value = this.config.clientId;
+      document.getElementById('access-token').value = this.config.accessToken;
+      document.getElementById('user-id').value = this.config.userId;
+      document.getElementById('parent-domain').value = 
+        this.config.parentDomain || '';
+      
+      modal.onclick = (e) => {
+        if (e.target === modal) {
+          this.hideConfigModal();
+          modal.onclick = null; // Remove the handler
+        }
+      };
+    } else {
+      // Don't allow closing if no config exists
+      modal.onclick = null;
+    }
   }
-}
 
 hideConfigModal() {
   const modal = document.getElementById('config-modal');
